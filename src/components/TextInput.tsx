@@ -4,6 +4,8 @@ import {
 	TextInputProps,
 	View,
 	TouchableOpacity,
+	StyleProp,
+	ViewProps,
 } from 'react-native'
 import { SvgProps } from 'react-native-svg'
 
@@ -15,13 +17,15 @@ import { CONSTANTS } from '../styles/constants'
 type SearchInputProps = {
 	onChange: (value: string) => void
 	accessibilityLabel: string
-	icon?(props: SvgProps): JSX.Element
+	style?: StyleProp<ViewProps>
+	icon?: (props: SvgProps) => JSX.Element
 } & TextInputProps
 
 export const TextInput = ({
 	onChange,
 	accessibilityLabel,
 	icon,
+	style,
 	...props
 }: SearchInputProps) => {
 	const [text, onChangeText] = useState('')
@@ -34,22 +38,26 @@ export const TextInput = ({
 	return (
 		<View
 			style={[
+				globalStyles.layer1,
+				globalStyles.layer1Border,
 				{
 					flexDirection: 'row',
 					alignItems: 'center',
-					paddingHorizontal: 10,
-					paddingVertical: 2,
-					borderColor: CONSTANTS.colors.black,
-					borderWidth: 1,
-					borderRadius: 10,
+					paddingHorizontal: CONSTANTS.spacing.medium,
+					paddingVertical: CONSTANTS.spacing.xsmall,
 					width: '100%',
-					backgroundColor: 'white',
 				},
 				isFocused && {
 					borderColor: CONSTANTS.colors.accent,
 				},
+				style && style,
 			]}>
-			{icon && createElement(icon, { color: CONSTANTS.colors.black })}
+			{icon &&
+				createElement(icon, {
+					color: CONSTANTS.colors.body,
+					height: 24,
+					width: 24,
+				})}
 			<RNTextInput
 				accessibilityLabel={accessibilityLabel}
 				onChangeText={onChangeText}
@@ -61,13 +69,18 @@ export const TextInput = ({
 				}}
 				onFocus={() => setIsFocused(true)}
 				onBlur={() => setIsFocused(false)}
+				placeholderTextColor={CONSTANTS.colors.body}
 				{...props}
 			/>
 			{text && (
 				<TouchableOpacity
 					accessibilityLabel="Cancel"
 					onPress={() => onChangeText('')}>
-					<X stroke={CONSTANTS.colors.black} />
+					<X
+						stroke={CONSTANTS.colors.body}
+						height={CONSTANTS.icon.size}
+						width={CONSTANTS.icon.size}
+					/>
 				</TouchableOpacity>
 			)}
 		</View>

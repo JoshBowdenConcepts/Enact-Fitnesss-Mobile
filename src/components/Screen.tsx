@@ -10,36 +10,34 @@ import {
 
 import { CONSTANTS } from '../styles/constants'
 
+import { globalStyles } from '../styles/global'
+
 const windowHeight = Dimensions.get('window').height
 
 type ScreenProps = {
 	children: React.ReactNode
+	preScrollChildren?: React.ReactNode
 	title?: string
 	style?: StyleProp<ViewStyle>
 }
 
-export default function Screen({ children, title, style }: ScreenProps) {
+export default function Screen({
+	children,
+	preScrollChildren,
+	title,
+	style,
+}: ScreenProps) {
 	return (
 		<SafeAreaView>
 			<View
 				style={[
 					{
-						padding: 20,
+						padding: CONSTANTS.spacing.xlarge,
 					},
 					style,
 				]}>
-				{title && (
-					<Text
-						style={{
-							fontFamily: 'MonaSansCondensed-Bold',
-							fontSize: 32,
-							marginBottom: 10,
-							fontWeight: '500',
-							color: CONSTANTS.colors.text,
-						}}>
-						{title}
-					</Text>
-				)}
+				{title && <Text style={globalStyles.h1}>{title}</Text>}
+				{preScrollChildren && preScrollChildren}
 				<ScrollView style={{ minHeight: windowHeight }}>{children}</ScrollView>
 			</View>
 		</SafeAreaView>

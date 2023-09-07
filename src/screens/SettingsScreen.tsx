@@ -7,7 +7,7 @@ import { globalStyles } from '../styles/global'
 
 export const SettingsScreen = () => {
 	return (
-		<Screen>
+		<Screen title="Settings">
 			<Text style={globalStyles.body}>Hello! Welcome to settings!</Text>
 			<StatusBar />
 		</Screen>

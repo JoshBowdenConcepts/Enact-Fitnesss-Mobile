@@ -6,7 +6,7 @@ import { globalStyles } from '../styles/global'
 
 export const WorkoutListScreen = () => {
 	return (
-		<Screen>
+		<Screen title="Workouts">
 			<Text style={globalStyles.body}>Hello! Welcome to workout list!</Text>
 		</Screen>
 	)

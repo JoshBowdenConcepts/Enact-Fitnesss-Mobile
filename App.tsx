@@ -17,6 +17,7 @@ export default function App() {
 		// HubotSans
 		'HubotSans-Light': require('./assets/HubotSans/Hubot-Sans-Light.otf'),
 		'HubotSans-Regular': require('./assets/HubotSans/Hubot-Sans-Regular.otf'),
+		'HubotSans-Bold': require('./assets/HubotSans/Hubot-Sans-Bold.otf'),
 	})
 
 	if (!fontsLoaded) {

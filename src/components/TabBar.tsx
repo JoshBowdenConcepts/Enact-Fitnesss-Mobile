@@ -4,6 +4,7 @@ import * as Icon from 'react-native-feather'
 import * as Haptics from 'expo-haptics'
 
 import { CONSTANTS } from '../styles/constants'
+import { globalStyles } from '../styles/global'
 
 type IconType = typeof Icon.Activity
 
@@ -62,18 +63,18 @@ export const TabBar = ({
 							stroke={
 								isFocused ? CONSTANTS.colors.accent : CONSTANTS.colors.text
 							}
-							width={26}
-							height={26}
+							width={CONSTANTS.icon.size}
+							height={CONSTANTS.icon.size}
 						/>
 						<Text
-							style={{
-								fontFamily: 'HubotSans-Regular',
-								fontSize: 12,
-								paddingTop: 8,
-								color: isFocused
-									? CONSTANTS.colors.accent
-									: CONSTANTS.colors.text,
-							}}>
+							style={[
+								globalStyles.tabBarLabel,
+								{
+									color: isFocused
+										? CONSTANTS.colors.accent
+										: CONSTANTS.colors.text,
+								},
+							]}>
 							{label + ''}
 						</Text>
 					</TouchableOpacity>
@@ -92,8 +93,10 @@ const styles = StyleSheet.create({
 		left: 20,
 		right: 20,
 		backgroundColor: 'white',
-		borderRadius: 10,
-		paddingHorizontal: 10,
-		paddingVertical: 10,
+		borderRadius: CONSTANTS.borderRadius,
+		paddingHorizontal: CONSTANTS.spacing.large,
+		paddingVertical: CONSTANTS.spacing.medium,
+		borderColor: CONSTANTS.colors.gray,
+		borderWidth: 1,
 	},
 })

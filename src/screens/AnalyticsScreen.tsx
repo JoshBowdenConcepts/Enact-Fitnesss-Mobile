@@ -6,7 +6,7 @@ import { globalStyles } from '../styles/global'
 
 export const AnalyticsScreen = () => {
 	return (
-		<Screen>
+		<Screen title="Analytics">
 			<Text style={globalStyles.body}>Hello! Welcome to analytics!</Text>
 		</Screen>
 	)
