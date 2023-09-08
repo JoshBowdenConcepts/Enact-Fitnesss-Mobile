@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@react-navigation/bottom-tabs": "^6.5.8",
+    "@react-navigation/stack": "^6.3.17",
     "@realm/react": "^0.6.0",
     "expo": "~49.0.8",
     "expo-dev-client": "^2.4.8",

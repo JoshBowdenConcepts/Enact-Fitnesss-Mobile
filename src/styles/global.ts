@@ -55,6 +55,13 @@ export const globalStyles = StyleSheet.create({
 		fontWeight: '500',
 		color: CONSTANTS.colors.text,
 	},
+	subHeading: {
+		fontFamily: 'HubotSans-Regular',
+		fontSize: 12,
+		marginBottom: CONSTANTS.spacing.small,
+		fontWeight: '500',
+		color: CONSTANTS.colors.text,
+	},
 	p: {
 		fontFamily: 'HubotSans-Regular',
 		fontSize: 14,
@@ -65,6 +72,13 @@ export const globalStyles = StyleSheet.create({
 		fontSize: 12,
 		fontWeight: '300',
 		lineHeight: 16,
+	},
+	buttonText: {
+		fontFamily: 'HubotSans-Regular',
+		fontSize: 16,
+		fontWeight: '300',
+		lineHeight: 16,
+		textTransform: 'uppercase',
 	},
 	tabBarLabel: {
 		fontFamily: 'HubotSans-Regular',

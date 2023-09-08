@@ -1,15 +1,25 @@
-import { View, Text, Image, TouchableOpacity } from 'react-native'
+import { View, Text, Image, TouchableOpacity, ViewProps } from 'react-native'
 import { MoreHorizontal } from 'react-native-feather'
+import * as Haptics from 'expo-haptics'
+
 import { CONSTANTS } from '../styles/constants'
 import { globalStyles } from '../styles/global'
+import { truncate } from '../helpers/truncate'
 
 type CardProps = {
 	title: string
 	description?: string
 	horizontal?: boolean
-}
+	onPress?: () => void
+} & ViewProps
 
-export const Card = ({ title, description, horizontal }: CardProps) => {
+export const Card = ({
+	title,
+	description,
+	horizontal,
+	onPress,
+	...props
+}: CardProps) => {
 	return (
 		<View
 			style={
@@ -20,8 +30,13 @@ export const Card = ({ title, description, horizontal }: CardProps) => {
 					alignContent: 'flex-start',
 					justifyContent: 'flex-start',
 				}
-			}>
-			<TouchableOpacity>
+			}
+			{...props}>
+			<TouchableOpacity
+				onPress={() => {
+					Haptics.selectionAsync()
+					onPress && onPress()
+				}}>
 				<Image
 					source={require('../../assets/workout.webp')}
 					style={{
@@ -52,11 +67,15 @@ export const Card = ({ title, description, horizontal }: CardProps) => {
 						style={{
 							flexGrow: 1,
 							justifyContent: 'center',
+						}}
+						onPress={() => {
+							Haptics.selectionAsync()
+							onPress && onPress()
 						}}>
 						<Text style={globalStyles.h5}>{title}</Text>
 					</TouchableOpacity>
 
-					<TouchableOpacity activeOpacity={0.7}>
+					<TouchableOpacity activeOpacity={0.7} accessibilityLabel="More">
 						<MoreHorizontal
 							stroke={CONSTANTS.colors.body}
 							style={globalStyles.icon}
@@ -64,8 +83,15 @@ export const Card = ({ title, description, horizontal }: CardProps) => {
 					</TouchableOpacity>
 				</View>
 				{description && (
-					<TouchableOpacity activeOpacity={0.7}>
-						<Text style={[globalStyles.subText]}>{description}</Text>
+					<TouchableOpacity
+						activeOpacity={0.7}
+						onPress={() => {
+							Haptics.selectionAsync()
+							onPress && onPress()
+						}}>
+						<Text style={[globalStyles.subText]}>
+							{truncate(description, 110)}
+						</Text>
 					</TouchableOpacity>
 				)}
 			</View>

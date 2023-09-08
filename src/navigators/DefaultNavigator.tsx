@@ -6,14 +6,29 @@ import {
 	Activity,
 	Home,
 	Sliders,
-	Settings,
 	BarChart2,
 	Layers,
 } from 'react-native-feather'
 
+export enum BottomNavItems {
+	WORKOUTS = 'Workouts',
+	EXERCISES = 'Exercises',
+	HOME = 'Home',
+	ANALYTICS = 'Analytics',
+	SETTINGS = 'Settings',
+}
+
+export type RootStackParamList = {
+	[BottomNavItems.WORKOUTS]: { name: string }
+	[BottomNavItems.EXERCISES]: { name: string }
+	[BottomNavItems.HOME]: { name: string }
+	[BottomNavItems.ANALYTICS]: { name: string }
+	[BottomNavItems.SETTINGS]: { name: string }
+}
+
 // Screens
 import { WorkoutListScreen } from '../screens/WorkoutListScreen'
-import { ExercisesScreen } from '../screens/ExerciseScreen'
+import { ExerciseNavigator } from './ExerciseNavigator'
 import { HomeScreen } from '../screens/HomeScreen'
 import { AnalyticsScreen } from '../screens/AnalyticsScreen'
 import { SettingsScreen } from '../screens/SettingsScreen'
@@ -21,54 +36,54 @@ import { SettingsScreen } from '../screens/SettingsScreen'
 // Local Components
 import { TabBar } from '../components/TabBar'
 
-const Tab = createBottomTabNavigator()
+const Tab = createBottomTabNavigator<RootStackParamList>()
 
 export const DefaultNavigator = () => {
 	return (
 		<Tab.Navigator
-			initialRouteName="Home"
+			initialRouteName={BottomNavItems.HOME}
 			tabBar={(props) => <TabBar {...props} />}
 			screenOptions={{
 				headerShown: false,
 				tabBarShowLabel: false,
 			}}>
 			<Tab.Screen
-				name="Workouts"
+				name={BottomNavItems.WORKOUTS}
 				component={WorkoutListScreen}
 				options={{
-					tabBarAccessibilityLabel: 'Workouts',
+					tabBarAccessibilityLabel: BottomNavItems.WORKOUTS,
 					tabBarIcon: Layers,
 				}}
 			/>
 			<Tab.Screen
-				name="Exercises"
-				component={ExercisesScreen}
+				name={BottomNavItems.EXERCISES}
+				component={ExerciseNavigator}
 				options={{
-					tabBarAccessibilityLabel: 'Exercises',
+					tabBarAccessibilityLabel: BottomNavItems.EXERCISES,
 					tabBarIcon: Activity,
 				}}
 			/>
 			<Tab.Screen
-				name="Home"
+				name={BottomNavItems.HOME}
 				component={HomeScreen}
 				options={{
-					tabBarAccessibilityLabel: 'Home',
+					tabBarAccessibilityLabel: BottomNavItems.HOME,
 					tabBarIcon: Home,
 				}}
 			/>
 			<Tab.Screen
-				name="Analytics"
+				name={BottomNavItems.ANALYTICS}
 				component={AnalyticsScreen}
 				options={{
-					tabBarAccessibilityLabel: 'Analytics',
+					tabBarAccessibilityLabel: BottomNavItems.ANALYTICS,
 					tabBarIcon: BarChart2,
 				}}
 			/>
 			<Tab.Screen
-				name="Settings"
+				name={BottomNavItems.SETTINGS}
 				component={SettingsScreen}
 				options={{
-					tabBarAccessibilityLabel: 'Settings',
+					tabBarAccessibilityLabel: BottomNavItems.SETTINGS,
 					tabBarIcon: Sliders,
 				}}
 			/>

@@ -1,13 +1,19 @@
 import { Text } from 'react-native'
-import { useFonts } from 'expo-font'
+import { BottomTabScreenProps } from '@react-navigation/bottom-tabs'
 
 import Screen from '../components/Screen'
 
 import { globalStyles } from '../styles/global'
+import {
+	BottomNavItems,
+	RootStackParamList,
+} from '../navigators/DefaultNavigator'
 
-export const HomeScreen = () => {
+type Props = BottomTabScreenProps<RootStackParamList, BottomNavItems.HOME>
+
+export const HomeScreen = ({ route }: Props) => {
 	return (
-		<Screen title="Home">
+		<Screen title={route.name}>
 			<Text style={[{ fontFamily: 'HubotSans-Regular' }, globalStyles.body]}>
 				Hello! Welcome to home!
 			</Text>

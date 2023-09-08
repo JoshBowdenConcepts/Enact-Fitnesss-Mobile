@@ -1,6 +1,6 @@
 import { UniqueArray } from '../helperTypes'
 
-type ExerciseCategories =
+export type ExerciseCategories =
 	| 'Shoulders'
 	| 'Chest'
 	| 'Back'

@@ -35,7 +35,7 @@ export const TabBar = ({
 						canPreventDefault: true,
 					})
 
-					Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success)
+					Haptics.selectionAsync()
 
 					if (!isFocused && !event.defaultPrevented) {
 						navigation.navigate(route.name)
@@ -58,7 +58,18 @@ export const TabBar = ({
 						testID={options.tabBarTestID}
 						onPress={onPress}
 						onLongPress={onLongPress}
-						style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+						style={[
+							{
+								flex: 1,
+								justifyContent: 'center',
+								alignItems: 'center',
+								paddingVertical: CONSTANTS.spacing.medium,
+							},
+							isFocused && {
+								borderTopWidth: 2,
+								borderColor: CONSTANTS.colors.accent,
+							},
+						]}>
 						<Icon
 							stroke={
 								isFocused ? CONSTANTS.colors.accent : CONSTANTS.colors.text
@@ -95,8 +106,8 @@ const styles = StyleSheet.create({
 		backgroundColor: 'white',
 		borderRadius: CONSTANTS.borderRadius,
 		paddingHorizontal: CONSTANTS.spacing.large,
-		paddingVertical: CONSTANTS.spacing.medium,
-		borderColor: CONSTANTS.colors.gray,
-		borderWidth: 1,
+		// paddingVertical: CONSTANTS.spacing.medium,
+		// borderColor: CONSTANTS.colors.gray,
+		// borderWidth: 1,
 	},
 })
