@@ -75,7 +75,7 @@ export const globalStyles = StyleSheet.create({
 	},
 	buttonText: {
 		fontFamily: 'HubotSans-Regular',
-		fontSize: 16,
+		fontSize: 14,
 		fontWeight: '300',
 		lineHeight: 16,
 		textTransform: 'uppercase',

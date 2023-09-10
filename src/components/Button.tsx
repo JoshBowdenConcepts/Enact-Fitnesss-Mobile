@@ -1,4 +1,10 @@
-import { TouchableHighlight, View, Text } from 'react-native'
+import {
+	TouchableHighlight,
+	View,
+	Text,
+	StyleProp,
+	ViewStyle,
+} from 'react-native'
 import * as Haptics from 'expo-haptics'
 import { CONSTANTS } from '../styles/constants'
 import { globalStyles } from '../styles/global'
@@ -6,11 +12,13 @@ import { globalStyles } from '../styles/global'
 type ButtonProps = {
 	onPress: () => void
 	title: string
+	style?: StyleProp<ViewStyle>
 }
 
-export const Button = ({ onPress, title }: ButtonProps) => {
+export const Button = ({ onPress, title, style }: ButtonProps) => {
 	return (
 		<TouchableHighlight
+			style={style}
 			onPress={() => {
 				Haptics.selectionAsync()
 				onPress()
@@ -22,6 +30,8 @@ export const Button = ({ onPress, title }: ButtonProps) => {
 					justifyContent: 'space-around',
 					paddingVertical: CONSTANTS.spacing.large,
 					borderRadius: CONSTANTS.borderRadius,
+					width: 'auto',
+					flexShrink: 1,
 				}}>
 				{title && (
 					<Text

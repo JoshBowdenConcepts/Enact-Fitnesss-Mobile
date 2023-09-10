@@ -2,6 +2,7 @@ import { useState, useEffect, createElement } from 'react'
 import {
 	TextInput as RNTextInput,
 	TextInputProps,
+	TextStyle,
 	View,
 	Text,
 	TouchableOpacity,
@@ -21,6 +22,7 @@ type SearchInputPropsBefore = {
 	accessibilityLabel: string
 	label?: string
 	style?: StyleProp<ViewProps>
+	inputStyle?: StyleProp<TextStyle>
 	icon?: (props: SvgProps) => JSX.Element
 } & TextInputProps
 
@@ -35,6 +37,7 @@ export const TextInput = ({
 	label,
 	icon,
 	style,
+	inputStyle,
 	value,
 	...props
 }: SearchInputProps) => {
@@ -46,7 +49,7 @@ export const TextInput = ({
 	}, [onChange, text])
 
 	return (
-		<View>
+		<View style={style}>
 			{label && <Text style={globalStyles.subHeading}>{label}</Text>}
 			<View
 				style={[
@@ -57,29 +60,30 @@ export const TextInput = ({
 						alignItems: 'center',
 						paddingHorizontal: CONSTANTS.spacing.medium,
 						paddingVertical: CONSTANTS.spacing.xsmall,
-						width: '100%',
-						marginBottom: CONSTANTS.spacing.large,
+						width: 'auto',
 					},
 					isFocused && {
 						borderColor: CONSTANTS.colors.accent,
 					},
-					style && style,
 				]}>
 				{icon &&
 					createElement(icon, {
 						color: CONSTANTS.colors.body,
-						height: 24,
-						width: 24,
+						height: CONSTANTS.icon.size,
+						width: CONSTANTS.icon.size,
 					})}
 				<RNTextInput
 					accessibilityLabel={accessibilityLabel}
 					onChangeText={(value) => onChangeText(value)}
 					value={text}
-					style={{
-						height: 40,
-						paddingHorizontal: 10,
-						flexGrow: 1,
-					}}
+					style={[
+						{
+							height: 40,
+							paddingHorizontal: 10,
+							flexGrow: 1,
+						},
+						inputStyle,
+					]}
 					onFocus={() => setIsFocused(true)}
 					onBlur={() => setIsFocused(false)}
 					placeholderTextColor={

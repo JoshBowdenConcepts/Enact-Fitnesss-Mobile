@@ -1,14 +1,15 @@
-import { UniqueArray } from '../helperTypes'
+export enum EXERCISE_CATEGORIES {
+	SHOULDERS = 'Shoulders',
+	CHEST = 'Chest',
+	BACK = 'Back',
+	ARMS = 'Arms',
+	LEGS = 'Legs',
+	ABS = 'Abs',
+	CARDIO = 'Cardio',
+	STRETCHING = 'Stretching',
+}
 
-export type ExerciseCategories =
-	| 'Shoulders'
-	| 'Chest'
-	| 'Back'
-	| 'Arms'
-	| 'Legs'
-	| 'Abs'
-	| 'Cardio'
-	| 'Stretching'
+export type ExerciseCategories = `${EXERCISE_CATEGORIES}`
 
 export type Exercises = {
 	name: string

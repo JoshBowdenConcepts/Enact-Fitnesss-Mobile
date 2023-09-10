@@ -2,13 +2,16 @@ import { useState } from 'react'
 import {
 	Text,
 	View,
+	TouchableOpacity,
 	NativeSyntheticEvent,
 	TextInputChangeEventData,
 } from 'react-native'
 import { BottomTabScreenProps } from '@react-navigation/bottom-tabs'
 import * as Icons from 'react-native-feather'
+import { selectionAsync } from 'expo-haptics'
 
 import { globalStyles } from '../styles/global'
+import { CONSTANTS } from '../styles/constants'
 
 import {
 	ExerciseNavItems,
@@ -18,6 +21,7 @@ import {
 import Screen from '../components/Screen'
 import { TextInput } from '../components/TextInput'
 import { Card } from '../components/Card'
+import { Button } from '../components/Button'
 
 type Props = BottomTabScreenProps<ExerciseStackParamList, ExerciseNavItems.LIST>
 
@@ -34,15 +38,39 @@ export const ExercisesScreen = ({ route, navigation }: Props) => {
 		<Screen
 			title={route.name}
 			preScrollChildren={
-				<TextInput
-					onChange={(value) => handleChange(value)}
-					accessibilityLabel="Search Exercises"
-					icon={(props) => <Icons.Search {...props} />}
-					placeholder="Search for exercises"
+				<View
 					style={{
-						marginBottom: 20,
-					}}
-				/>
+						flexDirection: 'row',
+						flexBasis: 'auto',
+						gap: 10,
+						alignItems: 'center',
+						marginBottom: CONSTANTS.spacing.large,
+					}}>
+					<TextInput
+						onChange={(value) => handleChange(value)}
+						accessibilityLabel="Search exercises"
+						icon={(props) => <Icons.Search {...props} />}
+						placeholder="Search for exercises"
+						style={{
+							flexGrow: 1,
+						}}
+					/>
+					<TouchableOpacity
+						accessibilityLabel="Create exercise"
+						onPress={() => {
+							navigation.navigate(ExerciseNavItems.DATA, {})
+							selectionAsync()
+						}}
+						style={{ justifyContent: 'center', alignItems: 'center' }}>
+						<Icons.Edit
+							stroke={CONSTANTS.colors.body}
+							style={{
+								height: CONSTANTS.icon.large,
+								width: CONSTANTS.icon.large,
+							}}
+						/>
+					</TouchableOpacity>
+				</View>
 			}>
 			<Text style={globalStyles.h3}>Category</Text>
 			<View style={{ gap: 25 }}>

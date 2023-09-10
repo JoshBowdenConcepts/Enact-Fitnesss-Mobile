@@ -18,5 +18,6 @@ export const CONSTANTS = {
 	},
 	icon: {
 		size: 24,
+		large: 34,
 	},
 }

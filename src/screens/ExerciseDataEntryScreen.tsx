@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
-import { Image, View, Alert } from 'react-native'
+import { Image, View, Alert, Text, ScrollView } from 'react-native'
 import { BottomTabScreenProps } from '@react-navigation/bottom-tabs'
-import { ExerciseCategories } from '../data/exercises'
+import { EXERCISE_CATEGORIES, ExerciseCategories } from '../data/exercises'
 
 import {
 	ExerciseNavItems,
@@ -11,6 +11,8 @@ import {
 import { CONSTANTS } from '../styles/constants'
 import { TextInput } from '../components/TextInput'
 import { Button } from '../components/Button'
+import { Dropdown } from '../components/Dropdown'
+import { globalStyles } from '../styles/global'
 
 type Props = BottomTabScreenProps<ExerciseStackParamList, ExerciseNavItems.DATA>
 
@@ -41,8 +43,19 @@ export const ExerciseDataEntryScreen = ({ route, navigation }: Props) => {
 		}
 	}
 
+	const returnWorkoutCategoryOptions = () => {
+		const dropdownItems = []
+		for (let category in EXERCISE_CATEGORIES) {
+			dropdownItems.push(<Dropdown.Item label={category} value={category} />)
+		}
+		return dropdownItems
+	}
+
 	return (
-		<View>
+		<ScrollView
+			style={{
+				marginBottom: 100,
+			}}>
 			<Image
 				source={require('../../assets/workout.webp')}
 				style={{
@@ -51,7 +64,12 @@ export const ExerciseDataEntryScreen = ({ route, navigation }: Props) => {
 					height: undefined,
 				}}
 			/>
-			<View style={{ padding: CONSTANTS.spacing.large }}>
+			<View style={{ padding: CONSTANTS.spacing.large, gap: 15 }}>
+				{!name ? (
+					<Text style={globalStyles.h2}>Create exercise</Text>
+				) : (
+					<Text style={globalStyles.h2}>Update exercise</Text>
+				)}
 				<TextInput
 					value={eName}
 					label="Exercise Name"
@@ -63,15 +81,21 @@ export const ExerciseDataEntryScreen = ({ route, navigation }: Props) => {
 					label="Exercise Description"
 					placeholder="Using a bench pressing a barbell with weight from the chest until arms are extended."
 					onChange={(value) => setEDescription(value as string)}
+					multiline
+					numberOfLines={8}
+					inputStyle={{
+						height: 100,
+					}}
 				/>
-				<TextInput
-					value={eType}
-					label="Exercise Type"
-					placeholder="Chest"
-					onChange={(value) => setEType(value as ExerciseCategories)}
-				/>
+				<Dropdown
+					selectedValue={eType}
+					onValueChange={(value) => setEType(value as ExerciseCategories)}>
+					{Object.values(EXERCISE_CATEGORIES).map((category) => {
+						return <Dropdown.Item label={category} value={category} />
+					})}
+				</Dropdown>
 				<Button title="Save" onPress={handleSubmit} />
 			</View>
-		</View>
+		</ScrollView>
 	)
 }
