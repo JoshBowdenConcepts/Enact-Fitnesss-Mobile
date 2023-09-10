@@ -39,6 +39,7 @@ export const TextInput = ({
 	style,
 	inputStyle,
 	value,
+	multiline,
 	...props
 }: SearchInputProps) => {
 	const [text, onChangeText] = useState(value)
@@ -57,9 +58,11 @@ export const TextInput = ({
 					globalStyles.layer1Border,
 					{
 						flexDirection: 'row',
-						alignItems: 'center',
+						alignItems: multiline ? 'flex-start' : 'center',
 						paddingHorizontal: CONSTANTS.spacing.medium,
-						paddingVertical: CONSTANTS.spacing.xsmall,
+						paddingVertical: multiline
+							? CONSTANTS.spacing.medium
+							: CONSTANTS.spacing.xsmall,
 						width: 'auto',
 					},
 					isFocused && {
@@ -86,6 +89,7 @@ export const TextInput = ({
 					]}
 					onFocus={() => setIsFocused(true)}
 					onBlur={() => setIsFocused(false)}
+					multiline={multiline}
 					placeholderTextColor={
 						label ? CONSTANTS.colors.gray : CONSTANTS.colors.body
 					}

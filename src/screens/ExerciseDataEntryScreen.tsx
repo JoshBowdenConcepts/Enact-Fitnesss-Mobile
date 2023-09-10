@@ -72,13 +72,15 @@ export const ExerciseDataEntryScreen = ({ route, navigation }: Props) => {
 				)}
 				<TextInput
 					value={eName}
-					label="Exercise Name"
+					label="Name"
+					accessibilityLabel="Exercise name"
 					placeholder="Bench Press"
 					onChange={(value) => setEName(value as string)}
 				/>
 				<TextInput
 					value={eDescription}
-					label="Exercise Description"
+					label="Description"
+					accessibilityLabel="Exercise description"
 					placeholder="Using a bench pressing a barbell with weight from the chest until arms are extended."
 					onChange={(value) => setEDescription(value as string)}
 					multiline
@@ -88,6 +90,8 @@ export const ExerciseDataEntryScreen = ({ route, navigation }: Props) => {
 					}}
 				/>
 				<Dropdown
+					label="Type"
+					accessibilityLabel="Exercise type"
 					selectedValue={eType}
 					onValueChange={(value) => setEType(value as ExerciseCategories)}>
 					{Object.values(EXERCISE_CATEGORIES).map((category) => {

@@ -6,31 +6,54 @@ import {
 	PickerItemProps,
 } from '@react-native-picker/picker'
 import { LinearGradient } from 'expo-linear-gradient'
+import { ChevronDown } from 'react-native-feather'
+
+import { CONSTANTS } from '../styles/constants'
+import { globalStyles } from '../styles/global'
 
 import { Button } from './Button'
 
-const Root = ({ selectedValue, ...props }: PickerProps) => {
+type DropdownProps = {
+	label?: string
+} & PickerProps
+
+const Root = ({ selectedValue, label, ...props }: DropdownProps) => {
 	const [showModal, setShowModal] = useState<boolean>(false)
 	return (
 		<View>
+			{label && <Text style={globalStyles.subHeading}>{label}</Text>}
 			<TouchableOpacity
 				style={{
-					height: 40,
-					paddingHorizontal: 10,
+					height: 50,
+					paddingHorizontal: 20,
 					flexGrow: 1,
-					justifyContent: 'center',
+					flexDirection: 'row',
 					alignItems: 'center',
+					justifyContent: 'space-between',
+					backgroundColor: CONSTANTS.colors.white,
+					borderColor: CONSTANTS.colors.gray,
+					borderWidth: 1,
+					borderRadius: CONSTANTS.borderRadius,
 				}}
 				onPress={() => {
 					setShowModal(true)
 				}}>
 				<Text>{selectedValue}</Text>
+				<ChevronDown
+					stroke={CONSTANTS.colors.body}
+					height={CONSTANTS.icon.size}
+					width={CONSTANTS.icon.size}
+				/>
 			</TouchableOpacity>
 			<Modal
 				visible={showModal ? true : false}
 				presentationStyle="overFullScreen"
 				transparent>
-				<LinearGradient colors={['rgba(0,0,0,0.2)', 'rgba(0,0,0,0.8)']}>
+				<LinearGradient
+					colors={[
+						CONSTANTS.gradients.modal.start,
+						CONSTANTS.gradients.modal.end,
+					]}>
 					<View
 						style={{
 							height: '100%',
@@ -40,9 +63,9 @@ const Root = ({ selectedValue, ...props }: PickerProps) => {
 						<View
 							style={{
 								flexDirection: 'column',
-								paddingHorizontal: 20,
-								paddingBottom: 25,
-								backgroundColor: 'white',
+								paddingHorizontal: CONSTANTS.action.spacing.horizontal,
+								paddingBottom: CONSTANTS.action.spacing.horizontal,
+								backgroundColor: CONSTANTS.colors.white,
 							}}>
 							<Picker
 								style={{
