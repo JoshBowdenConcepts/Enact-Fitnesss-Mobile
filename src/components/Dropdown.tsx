@@ -1,12 +1,11 @@
 import { useState } from 'react'
-import { View, TouchableOpacity, Modal, Text, Dimensions } from 'react-native'
+import { View, TouchableOpacity, Modal, Text } from 'react-native'
 import {
 	Picker,
 	PickerProps,
 	PickerItemProps,
 } from '@react-native-picker/picker'
-
-const windowHeight = Dimensions.get('window').height
+import { LinearGradient } from 'expo-linear-gradient'
 
 import { Button } from './Button'
 
@@ -27,26 +26,40 @@ const Root = ({ selectedValue, ...props }: PickerProps) => {
 				}}>
 				<Text>{selectedValue}</Text>
 			</TouchableOpacity>
-			<Modal visible={showModal ? true : false}>
-				<View
-					style={{
-						height: windowHeight,
-						flexDirection: 'column',
-					}}>
-					<Picker
+			<Modal
+				visible={showModal ? true : false}
+				presentationStyle="overFullScreen"
+				transparent>
+				<LinearGradient colors={['rgba(0,0,0,0.2)', 'rgba(0,0,0,0.8)']}>
+					<View
 						style={{
-							flexGrow: 1,
-						}}
-						selectedValue={selectedValue}
-						{...props}
-					/>
-					<Button
-						title="Save"
-						onPress={() => {
-							setShowModal(false)
-						}}
-					/>
-				</View>
+							height: '100%',
+							flexDirection: 'column',
+							justifyContent: 'flex-end',
+						}}>
+						<View
+							style={{
+								flexDirection: 'column',
+								paddingHorizontal: 20,
+								paddingBottom: 25,
+								backgroundColor: 'white',
+							}}>
+							<Picker
+								style={{
+									flexGrow: 1,
+								}}
+								selectedValue={selectedValue}
+								{...props}
+							/>
+							<Button
+								title="Save"
+								onPress={() => {
+									setShowModal(false)
+								}}
+							/>
+						</View>
+					</View>
+				</LinearGradient>
 			</Modal>
 		</View>
 	)
