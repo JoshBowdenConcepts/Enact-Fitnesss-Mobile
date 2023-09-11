@@ -1,5 +1,14 @@
-import { useState } from 'react'
-import { View, TouchableOpacity, Modal, Text } from 'react-native'
+import { useState, useRef } from 'react'
+import {
+	View,
+	TouchableOpacity,
+	Modal,
+	Text,
+	Dimensions,
+	Animated,
+	StyleSheet,
+	LayoutAnimation,
+} from 'react-native'
 import {
 	Picker,
 	PickerProps,
@@ -13,12 +22,15 @@ import { globalStyles } from '../styles/global'
 
 import { Button } from './Button'
 
+const windowHeight = Dimensions.get('window').height
+
 type DropdownProps = {
 	label?: string
 } & PickerProps
 
 const Root = ({ selectedValue, label, ...props }: DropdownProps) => {
-	const [showModal, setShowModal] = useState<boolean>(false)
+	const [showModal, setShowModal] = useState(false)
+
 	return (
 		<View>
 			{label && <Text style={globalStyles.subHeading}>{label}</Text>}
@@ -46,6 +58,11 @@ const Root = ({ selectedValue, label, ...props }: DropdownProps) => {
 				/>
 			</TouchableOpacity>
 			<Modal
+				style={{
+					height: windowHeight * 2,
+				}}
+				// FIX: This should be removed in favor of the animation library
+				animationType="slide"
 				visible={showModal ? true : false}
 				presentationStyle="overFullScreen"
 				transparent>
@@ -64,8 +81,9 @@ const Root = ({ selectedValue, label, ...props }: DropdownProps) => {
 							style={{
 								flexDirection: 'column',
 								paddingHorizontal: CONSTANTS.action.spacing.horizontal,
-								paddingBottom: CONSTANTS.action.spacing.horizontal,
+								paddingBottom: CONSTANTS.action.spacing.vertical,
 								backgroundColor: CONSTANTS.colors.white,
+								borderRadius: CONSTANTS.borderRadius,
 							}}>
 							<Picker
 								style={{

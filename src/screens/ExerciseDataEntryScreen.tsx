@@ -95,7 +95,9 @@ export const ExerciseDataEntryScreen = ({ route, navigation }: Props) => {
 					selectedValue={eType}
 					onValueChange={(value) => setEType(value as ExerciseCategories)}>
 					{Object.values(EXERCISE_CATEGORIES).map((category) => {
-						return <Dropdown.Item label={category} value={category} />
+						return (
+							<Dropdown.Item key={category} label={category} value={category} />
+						)
 					})}
 				</Dropdown>
 				<Button title="Save" onPress={handleSubmit} />

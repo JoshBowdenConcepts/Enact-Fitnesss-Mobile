@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
 		flexDirection: 'row',
 		justifyContent: 'center',
 		position: 'absolute',
-		bottom: CONSTANTS.action.spacing.horizontal,
+		bottom: CONSTANTS.action.spacing.vertical,
 		left: CONSTANTS.action.spacing.horizontal,
 		right: CONSTANTS.action.spacing.horizontal,
 		backgroundColor: 'white',

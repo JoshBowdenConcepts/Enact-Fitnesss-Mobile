@@ -79,6 +79,7 @@ export const ExercisesScreen = ({ route, navigation }: Props) => {
 					description={
 						'A short description here. This could wrap if I needed it to as well. But I would want to ensure line height. More text to see how far I need to go before I truncate the text.'
 					}
+					horizontal
 					onPress={() =>
 						navigation.navigate(ExerciseNavItems.DETAILS, {
 							name: 'Something Cool',

@@ -35,6 +35,7 @@ import { SettingsScreen } from '../screens/SettingsScreen'
 
 // Local Components
 import { TabBar } from '../components/TabBar'
+import { WorkoutNavigator } from './WorkoutNavigator'
 
 const Tab = createBottomTabNavigator<RootStackParamList>()
 
@@ -49,7 +50,7 @@ export const DefaultNavigator = () => {
 			}}>
 			<Tab.Screen
 				name={BottomNavItems.WORKOUTS}
-				component={WorkoutListScreen}
+				component={WorkoutNavigator}
 				options={{
 					tabBarAccessibilityLabel: BottomNavItems.WORKOUTS,
 					tabBarIcon: Layers,
