@@ -61,7 +61,7 @@ export const WorkoutListScreen = ({ route, navigation }: Props) => {
 							selectionAsync()
 						}}
 						style={{ justifyContent: 'center', alignItems: 'center' }}>
-						<Icons.Edit
+						<Icons.PlusSquare
 							stroke={CONSTANTS.colors.body}
 							style={{
 								height: CONSTANTS.icon.large,
@@ -80,7 +80,7 @@ export const WorkoutListScreen = ({ route, navigation }: Props) => {
 					}
 					onPress={() =>
 						navigation.navigate(WorkoutNavItems.DETAILS, {
-							name: 'Something Cool',
+							name: 'Just Ok Workout',
 							description:
 								'A short description here. This could wrap if I needed it to as well. But I would want to ensure line height. More text to see how far I need to go before I truncate the text.',
 						})
@@ -93,7 +93,7 @@ export const WorkoutListScreen = ({ route, navigation }: Props) => {
 					}
 					onPress={() =>
 						navigation.navigate(WorkoutNavItems.DETAILS, {
-							name: 'TRX Pushup',
+							name: 'Awesome Workout',
 							description:
 								'A short description here. This could wrap if I needed it to as well. But I would want to ensure line height. More text to see how far I need to go before I truncate the text.',
 						})

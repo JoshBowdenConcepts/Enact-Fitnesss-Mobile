@@ -1,3 +1,5 @@
+import { useState } from 'react'
+
 import {
 	View,
 	Text,
@@ -5,6 +7,7 @@ import {
 	TouchableOpacity,
 	ViewProps,
 	TouchableOpacityProps,
+	GestureResponderEvent,
 } from 'react-native'
 import { MoreHorizontal } from 'react-native-feather'
 import * as Haptics from 'expo-haptics'
@@ -20,6 +23,7 @@ type CardProps = {
 	onPress?: () => void
 	onLongPress?: TouchableOpacityProps['onLongPress']
 	disabled?: boolean
+	isDraggable?: boolean
 } & ViewProps
 
 export const Card = ({
@@ -29,26 +33,43 @@ export const Card = ({
 	onPress,
 	onLongPress,
 	disabled,
+	isDraggable,
 	...props
 }: CardProps) => {
+	const [active, setActive] = useState(false)
+
+	const handleLongPress = (e: GestureResponderEvent) => {
+		onLongPress && onLongPress(e)
+		setActive(true)
+	}
+
+	const handlePressOut = () => {
+		setActive(false)
+	}
+
 	return (
 		<View
-			style={
+			style={[
 				horizontal && {
 					width: '100%',
 					flexDirection: 'row',
 					gap: 10,
 					alignContent: 'flex-start',
 					justifyContent: 'flex-start',
-				}
-			}
+				},
+				isDraggable &&
+					active && {
+						backgroundColor: CONSTANTS.colors.white,
+					},
+			]}
 			{...props}>
 			<TouchableOpacity
 				onPress={() => {
 					Haptics.selectionAsync()
 					onPress && onPress()
 				}}
-				onLongPress={onLongPress}
+				onLongPress={handleLongPress}
+				onPressOut={handlePressOut}
 				disabled={disabled}>
 				<Image
 					source={require('../../assets/workout.webp')}
@@ -76,7 +97,8 @@ export const Card = ({
 						},
 					]}>
 					<TouchableOpacity
-						onLongPress={onLongPress}
+						onLongPress={handleLongPress}
+						onPressOut={handlePressOut}
 						disabled={disabled}
 						activeOpacity={0.7}
 						style={{
@@ -99,7 +121,8 @@ export const Card = ({
 				</View>
 				{description && (
 					<TouchableOpacity
-						onLongPress={onLongPress}
+						onLongPress={handleLongPress}
+						onPressOut={handlePressOut}
 						disabled={disabled}
 						activeOpacity={0.7}
 						onPress={() => {

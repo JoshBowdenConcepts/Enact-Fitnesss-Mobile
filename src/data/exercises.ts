@@ -19,37 +19,27 @@ export type Exercises = {
 
 export const exercises: Exercises[] = [
 	{
-		name: 'Dumbbell Bench Press',
-		category: 'Chest',
+		name: 'Something Cool',
+		category: EXERCISE_CATEGORIES.ARMS,
 		description:
-			"The dumbbell bench press is a mainstay of workout enthusiasts worldwide. It's a classic move for building a bigger, stronger chest. As such, it's often placed first in mass-building chest workouts.",
+			'A short description here. This could wrap if I needed it to as well. But I would want to ensure line height. More text to see how far I need to go before I truncate the text.',
 	},
 	{
-		name: 'Dumbbell Front Raises',
-		category: 'Shoulders',
+		name: 'TRX Pushup',
+		category: EXERCISE_CATEGORIES.CHEST,
+		description:
+			'A short description here. This could wrap if I needed it to as well. But I would want to ensure line height. More text to see how far I need to go before I truncate the text.',
 	},
 	{
-		name: 'Straight Leg Deadlift',
-		category: 'Back',
+		name: 'Lat Pull Down',
+		category: EXERCISE_CATEGORIES.BACK,
+		description:
+			'A short description here. This could wrap if I needed it to as well. But I would want to ensure line height. More text to see how far I need to go before I truncate the text.',
 	},
 	{
-		name: 'Dumbbell Curl',
-		category: 'Arms',
-	},
-	{
-		name: 'Barbell Squat',
-		category: 'Legs',
-	},
-	{
-		name: 'Cable Crunches',
-		category: 'Abs',
-	},
-	{
-		name: 'Running',
-		category: 'Cardio',
-	},
-	{
-		name: 'Cat Cow',
-		category: 'Stretching',
+		name: 'Leg Lift',
+		category: EXERCISE_CATEGORIES.ABS,
+		description:
+			'A short description here. This could wrap if I needed it to as well. But I would want to ensure line height. More text to see how far I need to go before I truncate the text.',
 	},
 ]

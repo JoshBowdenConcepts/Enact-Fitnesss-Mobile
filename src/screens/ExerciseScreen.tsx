@@ -17,6 +17,7 @@ import {
 	ExerciseNavItems,
 	ExerciseStackParamList,
 } from '../navigators/ExerciseNavigator'
+import { exercises, Exercises } from '../data/exercises'
 
 import Screen from '../components/Screen'
 import { TextInput } from '../components/TextInput'
@@ -26,12 +27,34 @@ import { Button } from '../components/Button'
 type Props = BottomTabScreenProps<ExerciseStackParamList, ExerciseNavItems.LIST>
 
 export const ExercisesScreen = ({ route, navigation }: Props) => {
+	// TODO: Replace this with Realm data once connected
+	const [data, setData] = useState(exercises)
 	const [text, onChangeText] = useState('Text')
 
 	const handleChange = (
 		value: string | NativeSyntheticEvent<TextInputChangeEventData>
 	) => {
 		onChangeText(value as string)
+	}
+
+	const renderItems = (items: Exercises[]) => {
+		return items.map((item) => {
+			return (
+				<Card
+					title={item.name}
+					key={item.name}
+					description={item.description}
+					horizontal
+					onPress={() =>
+						navigation.navigate(ExerciseNavItems.DETAILS, {
+							name: item.name,
+							description: item.description,
+							type: item.category,
+						})
+					}
+				/>
+			)
+		})
 	}
 
 	return (
@@ -62,7 +85,7 @@ export const ExercisesScreen = ({ route, navigation }: Props) => {
 							selectionAsync()
 						}}
 						style={{ justifyContent: 'center', alignItems: 'center' }}>
-						<Icons.Edit
+						<Icons.PlusSquare
 							stroke={CONSTANTS.colors.body}
 							style={{
 								height: CONSTANTS.icon.large,
@@ -73,38 +96,7 @@ export const ExercisesScreen = ({ route, navigation }: Props) => {
 				</View>
 			}>
 			<Text style={globalStyles.h3}>Category</Text>
-			<View style={{ gap: 25 }}>
-				<Card
-					title="Something Cool"
-					description={
-						'A short description here. This could wrap if I needed it to as well. But I would want to ensure line height. More text to see how far I need to go before I truncate the text.'
-					}
-					horizontal
-					onPress={() =>
-						navigation.navigate(ExerciseNavItems.DETAILS, {
-							name: 'Something Cool',
-							description:
-								'A short description here. This could wrap if I needed it to as well. But I would want to ensure line height. More text to see how far I need to go before I truncate the text.',
-							type: 'Arms',
-						})
-					}
-				/>
-				<Card
-					title="TRX Pushup"
-					description={
-						'A short description here. This could wrap if I needed it to as well. But I would want to ensure line height. More text to see how far I need to go before I truncate the text.'
-					}
-					horizontal
-					onPress={() =>
-						navigation.navigate(ExerciseNavItems.DETAILS, {
-							name: 'TRX Pushup',
-							description:
-								'A short description here. This could wrap if I needed it to as well. But I would want to ensure line height. More text to see how far I need to go before I truncate the text.',
-							type: 'Chest',
-						})
-					}
-				/>
-			</View>
+			<View style={{ gap: CONSTANTS.spacing.xlarge }}>{renderItems(data)}</View>
 		</Screen>
 	)
 }
