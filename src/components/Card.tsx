@@ -1,4 +1,11 @@
-import { View, Text, Image, TouchableOpacity, ViewProps } from 'react-native'
+import {
+	View,
+	Text,
+	Image,
+	TouchableOpacity,
+	ViewProps,
+	TouchableOpacityProps,
+} from 'react-native'
 import { MoreHorizontal } from 'react-native-feather'
 import * as Haptics from 'expo-haptics'
 
@@ -11,6 +18,8 @@ type CardProps = {
 	description?: string
 	horizontal?: boolean
 	onPress?: () => void
+	onLongPress?: TouchableOpacityProps['onLongPress']
+	disabled?: boolean
 } & ViewProps
 
 export const Card = ({
@@ -18,6 +27,8 @@ export const Card = ({
 	description,
 	horizontal,
 	onPress,
+	onLongPress,
+	disabled,
 	...props
 }: CardProps) => {
 	return (
@@ -36,7 +47,9 @@ export const Card = ({
 				onPress={() => {
 					Haptics.selectionAsync()
 					onPress && onPress()
-				}}>
+				}}
+				onLongPress={onLongPress}
+				disabled={disabled}>
 				<Image
 					source={require('../../assets/workout.webp')}
 					style={{
@@ -63,6 +76,8 @@ export const Card = ({
 						},
 					]}>
 					<TouchableOpacity
+						onLongPress={onLongPress}
+						disabled={disabled}
 						activeOpacity={0.7}
 						style={{
 							flexGrow: 1,
@@ -84,6 +99,8 @@ export const Card = ({
 				</View>
 				{description && (
 					<TouchableOpacity
+						onLongPress={onLongPress}
+						disabled={disabled}
 						activeOpacity={0.7}
 						onPress={() => {
 							Haptics.selectionAsync()

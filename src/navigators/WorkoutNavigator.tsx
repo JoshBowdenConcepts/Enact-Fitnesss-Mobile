@@ -1,6 +1,7 @@
 import { createStackNavigator } from '@react-navigation/stack'
 
 import { WorkoutListScreen } from '../screens/WorkoutListScreen'
+import { WorkoutDetailsScreen } from '../screens/WorkoutDetailsScreen'
 
 export enum WorkoutNavItems {
 	LIST = 'My Workouts',
@@ -30,10 +31,11 @@ export const WorkoutNavigator = () => {
 				headerShown: false,
 			}}>
 			<Stack.Screen name={WorkoutNavItems.LIST} component={WorkoutListScreen} />
-			{/* <Stack.Screen
+			<Stack.Screen
 				name={WorkoutNavItems.DETAILS}
 				component={WorkoutDetailsScreen}
 			/>
+			{/*
 			<Stack.Screen
 				name={WorkoutNavItems.DATA}
 				component={WorkoutDataEntryScreen}
